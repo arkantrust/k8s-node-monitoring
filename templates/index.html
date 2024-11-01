@@ -5,19 +5,20 @@
     <title>System Monitoring</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div>
-        <h1>System Monitoring</h1>
-        <div class="container">
-            <div id="cpu-gauge"></div>
-            <div id="mem-gauge"></div>
-        </div>
-        {% if message %}
-        <div class="alert alert-danger">{{ message }}</div>
-        {% endif %}
+    <h1>System Monitoring</h1>
+    <div class="container">
+        <div id="cpu-gauge"></div>
+        <div id="mem-gauge"></div>
     </div>
+    {% if alert %}
+        <div class="alert">{{ alert }}</div>
+    {% endif %}
     <script>
         var cpuGauge = {
             type: "indicator",

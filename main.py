@@ -22,7 +22,15 @@ templates = Jinja2Templates(directory="templates")
 async def monitoring(req: Request) -> _TemplateResponse:
     cpu = cpu_percent()
     memory = virtual_memory().percent
+    alert = ""
+    if cpu > 80:
+        alert = "CPU usage is high"
+    if memory > 80:
+        alert = "Memory usage is high"
+    if cpu > 80 and memory > 80:
+        alert = "CPU and Memory usage is high"
     return templates.TemplateResponse(
-        request=req, name="index.html", context={"cpu": cpu, "memory": memory, "message": ""}
+        request=req,
+        name="index.html",
+        context={"cpu": cpu, "memory": memory, "alert": alert}
     )
-
